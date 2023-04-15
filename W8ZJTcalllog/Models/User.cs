@@ -16,6 +16,8 @@ namespace W8ZJTcalllog.Models
         [StringLength(30)] public string Callsign { get; set; } = string.Empty;
         [StringLength(255)] public string? Email { get; set; }
         [StringLength(255)] public string? Address { get; set; }
+        [StringLength(255)] public string? Style { get; set; }
+        [StringLength(255)] public string? LogMode { get; set; }
         public int NumberOfCallsToShow { get; set; } = 10;
         public int PriviousCallsToShow { get; set; } = 10;
         [StringLength(4)] public string? DefaultMode { get; set; } = "SSB";
