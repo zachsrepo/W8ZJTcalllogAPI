@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using W8ZJTcalllog.Models;
 
@@ -10,9 +11,10 @@ using W8ZJTcalllog.Models;
 namespace W8ZJTcalllog.Migrations
 {
     [DbContext(typeof(FccAmateurContext))]
-    partial class FccAmateurContextModelSnapshot : ModelSnapshot
+    [Migration("20230427012556_add properties to hamlog")]
+    partial class addpropertiestohamlog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,7 +174,7 @@ namespace W8ZJTcalllog.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("varchar(40)");
 
-                    b.Property<DateTime?>("DateAndTime")
+                    b.Property<DateTime>("DateAndTime")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("FccId")
@@ -229,7 +231,7 @@ namespace W8ZJTcalllog.Migrations
                         .HasMaxLength(2)
                         .HasColumnType("varchar(2)");
 
-                    b.Property<DateTime?>("TimeOff")
+                    b.Property<DateTime>("TimeOff")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("UserId")

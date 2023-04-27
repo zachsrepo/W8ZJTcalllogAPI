@@ -21,7 +21,5 @@
         public string? State { get; set; }
 
         public string? Zip { get; set; }
-
-        //  public virtual Hd? hd { get; set; }
     }
 }

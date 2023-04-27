@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using W8ZJTcalllog.Models;
 
@@ -16,42 +21,25 @@ namespace W8ZJTcalllog.Controllers
         }
 
         // GET: api/HamLogs
-        [HttpGet("{userid}")]
-        public async Task<ActionResult<IEnumerable<HamLog>>> GetHamLogs(int userid)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<HamLog>>> GetHamLogs()
         {
-            if (_context.HamLogs == null)
-            {
-                return NotFound();
-            }
-            return await _context.HamLogs.Where(n => n.UserId == userid).ToListAsync();
-        }
-        // GET: api/Ens/callsign/w8zjt/5
-        [HttpGet("callsign/{userid}/{callsign}")]
-        public async Task<ActionResult<IEnumerable<HamLog>>> GetEnByCallsign(string callsign, int userid)
-        {
-            if (_context.HamLogs == null)
-            {
-                return NotFound();
-            }
-            var callLogs = await _context.HamLogs.Where(n => n.UserId == userid).ToListAsync();
-
-            if (callLogs == null)
-            {
-                return NotFound();
-            }
-
-            return callLogs;
+          if (_context.HamLogs == null)
+          {
+              return NotFound();
+          }
+            return await _context.HamLogs.ToListAsync();
         }
 
         // GET: api/HamLogs/5
-        [HttpGet("{userid}/{id}")]
-        public async Task<ActionResult<HamLog>> GetHamLog(int id, int userid)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<HamLog>> GetHamLog(int id)
         {
-            if (_context.HamLogs == null)
-            {
-                return NotFound();
-            }
-            var hamLog = await _context.HamLogs.Where(n => n.UserId == userid).SingleOrDefaultAsync(n => n.Id == id);
+          if (_context.HamLogs == null)
+          {
+              return NotFound();
+          }
+            var hamLog = await _context.HamLogs.FindAsync(id);
 
             if (hamLog == null)
             {
@@ -63,10 +51,10 @@ namespace W8ZJTcalllog.Controllers
 
         // PUT: api/HamLogs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{userid}/{id}")]
-        public async Task<IActionResult> PutHamLog(int userid, int id, HamLog hamLog)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutHamLog(int id, HamLog hamLog)
         {
-            if (id != hamLog.Id && userid != hamLog.UserId)
+            if (id != hamLog.Id)
             {
                 return BadRequest();
             }
@@ -94,17 +82,13 @@ namespace W8ZJTcalllog.Controllers
 
         // POST: api/HamLogs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("{userid}")]
-        public async Task<ActionResult<HamLog>> PostHamLog(HamLog hamLog, int userid)
+        [HttpPost]
+        public async Task<ActionResult<HamLog>> PostHamLog(HamLog hamLog)
         {
-            if (hamLog.UserId != userid)
-            {
-                return BadRequest();
-            }
-            if (_context.HamLogs == null)
-            {
-                return Problem("Entity set 'FccAmateurContext.HamLogs'  is null.");
-            }
+          if (_context.HamLogs == null)
+          {
+              return Problem("Entity set 'FccAmateurContext.HamLogs'  is null.");
+          }
             _context.HamLogs.Add(hamLog);
             await _context.SaveChangesAsync();
 
@@ -112,15 +96,15 @@ namespace W8ZJTcalllog.Controllers
         }
 
         // DELETE: api/HamLogs/5
-        [HttpDelete("{userid}/{id}")]
-        public async Task<IActionResult> DeleteHamLog(int id, int userid)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteHamLog(int id)
         {
             if (_context.HamLogs == null)
             {
                 return NotFound();
             }
             var hamLog = await _context.HamLogs.FindAsync(id);
-            if (hamLog == null || hamLog.UserId != userid)
+            if (hamLog == null)
             {
                 return NotFound();
             }

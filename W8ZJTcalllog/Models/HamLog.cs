@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace W8ZJTcalllog.Models
@@ -15,10 +16,13 @@ namespace W8ZJTcalllog.Models
         [StringLength(30)] public string? Reciprical { get; set; }
         [StringLength(50)] public string? Frequency { get; set; }
         [StringLength(5)] public string? Mode { get; set; }
+        [StringLength(5)] public string? RSTsent { get; set; }
+        [StringLength(5)] public string? RSTrec { get; set; }
         public int? band { get; set; }
         public int? Power { get; set; }
         [StringLength(30)] public string FirstName { get; set; } = string.Empty;
         [StringLength(30)] public string? LastName { get; set; }
+        [StringLength(100)] public string? FullName { get; set; }
         [StringLength(40)] public string? Country { get; set; } = "United States";
         [StringLength(40)] public string? City { get; set; }
         [StringLength(2)] public string? State { get; set; }
@@ -27,7 +31,8 @@ namespace W8ZJTcalllog.Models
         [StringLength(255)] public string? Comments { get; set; }
         public string? QTH { get; set; }
         public int LogCount { get; set; } = 0;
-        public DateTime DateAndTime { get; set; }
+        public DateTime? DateAndTime { get; set; }
+        public DateTime? TimeOff { get; set; }
 
         public HamLog() { }
     }
