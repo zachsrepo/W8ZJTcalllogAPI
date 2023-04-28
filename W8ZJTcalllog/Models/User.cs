@@ -20,7 +20,7 @@ namespace W8ZJTcalllog.Models
         [StringLength(255)] public string? LogMode { get; set; }
         public int NumberOfCallsToShow { get; set; } = 10;
         public int PriviousCallsToShow { get; set; } = 10;
-        [StringLength(4)] public string? DefaultMode { get; set; } = "SSB";
+        [StringLength(4)] public string? DefaultMode { get; set; } = "LSB";
         public int DefaultPower { get; set; } = 100;
         [StringLength(20)] public string Status { get; set; } = "NEW";
         public virtual ICollection<HamLog>? HamLogs { get; set; }

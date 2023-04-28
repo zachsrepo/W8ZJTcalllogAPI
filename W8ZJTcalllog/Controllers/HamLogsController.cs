@@ -30,6 +30,16 @@ namespace W8ZJTcalllog.Controllers
           }
             return await _context.HamLogs.ToListAsync();
         }
+        // GET: api/HamLogs/callsign/userid
+        [HttpGet("{callsign}/{userId}")]
+        public async Task<ActionResult<IEnumerable<HamLog>>> GetHamLogs(string callsign, int userId)
+        {
+            if (_context.HamLogs == null)
+            {
+                return NotFound();
+            }
+            return await _context.HamLogs.Where(n => n.UserId == userId && n.Callsign == callsign).ToListAsync();
+        }
 
         // GET: api/HamLogs/5
         [HttpGet("{id}")]
