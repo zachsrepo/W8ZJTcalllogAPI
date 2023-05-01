@@ -35,8 +35,8 @@ namespace W8ZJTcalllog.Controllers
         [HttpGet("{Username}/{Password}")]
         public async Task<ActionResult<User>> GetUserLogin(string userName, string password)
         {
-            var passen = Encrypt.Encode(password);
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == userName && x.Password == passen);
+            
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == userName && x.Password == password);
             if (user == null)
             {
                 return NotFound();
@@ -97,8 +97,7 @@ namespace W8ZJTcalllog.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            string enpass = Encrypt.Encode(user.Password);
-            user.Password = enpass;
+
         
           if (_context.Users == null)
           {

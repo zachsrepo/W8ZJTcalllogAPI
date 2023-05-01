@@ -12,7 +12,7 @@ namespace W8ZJTcalllog.Models
         [StringLength(50)] public string FirstName { get; set; } = string.Empty;
         [StringLength(50)] public string LastName { get; set; } = string.Empty;
         [StringLength(30)] public string UserName { get; set; } = string.Empty;
-        [StringLength(30)] public string Password { get; set; } = string.Empty;
+        [StringLength(100)] public string Password { get; set; } = string.Empty;
         [StringLength(30)] public string Callsign { get; set; } = string.Empty;
         [StringLength(255)] public string? Email { get; set; }
         [StringLength(255)] public string? Address { get; set; }
