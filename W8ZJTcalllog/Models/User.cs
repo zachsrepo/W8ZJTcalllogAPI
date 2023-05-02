@@ -9,6 +9,8 @@ namespace W8ZJTcalllog.Models
     {
         public int Id { get; set; }
         public bool IsAdmin { get; set; }
+        public bool showNetColumn { get; set; }
+        public bool showAddressColumn { get; set; }
         [StringLength(50)] public string FirstName { get; set; } = string.Empty;
         [StringLength(50)] public string LastName { get; set; } = string.Empty;
         [StringLength(30)] public string UserName { get; set; } = string.Empty;
@@ -21,7 +23,9 @@ namespace W8ZJTcalllog.Models
         public int NumberOfCallsToShow { get; set; } = 10;
         public int PriviousCallsToShow { get; set; } = 10;
         [StringLength(4)] public string? DefaultMode { get; set; } = "LSB";
+        [StringLength(4)] public string? LastWorkedMode { get; set; }
         public int DefaultPower { get; set; } = 100;
+        public int LastWorkedPower { get; set; }
         [StringLength(20)] public string Status { get; set; } = "NEW";
         public virtual ICollection<HamLog>? HamLogs { get; set; }
     }

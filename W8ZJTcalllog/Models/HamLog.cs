@@ -29,10 +29,12 @@ namespace W8ZJTcalllog.Models
         [StringLength(10)] public string? PostalCode { get; set; }
         [StringLength(100)] public string? Address { get; set; }
         [StringLength(255)] public string? Comments { get; set; }
-        public string? QTH { get; set; }
+        public string? QTH { get; set; } // NET
         public int LogCount { get; set; } = 0;
         public DateTime? DateAndTime { get; set; }
         public DateTime? TimeOff { get; set; }
+        public bool RstSentbool { get; set; }
+        public bool RstRecbool { get; set; }
 
         public HamLog() { }
     }
