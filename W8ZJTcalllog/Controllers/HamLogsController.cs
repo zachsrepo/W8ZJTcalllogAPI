@@ -30,7 +30,7 @@ namespace W8ZJTcalllog.Controllers
           }
             return await _context.HamLogs.ToListAsync();
         }
-        // GET: api/HamLogs
+        // GET: api/list/userid/quantity
         [HttpGet("list/{userId}/{quantity}")]
         public async Task<ActionResult<IEnumerable<HamLog>>> GetHamLogslist(int userId, int quantity)
         {
@@ -113,9 +113,10 @@ namespace W8ZJTcalllog.Controllers
           {
               return Problem("Entity set 'FccAmateurContext.HamLogs'  is null.");
           }
+            var id = hamLog.UserId;
             _context.HamLogs.Add(hamLog);
             await _context.SaveChangesAsync();
-            await UpdateRecordCount(hamLog.UserId);
+            await UpdateRecordCount(id);
 
             return CreatedAtAction("GetHamLog", new { id = hamLog.Id }, hamLog);
         }
@@ -145,6 +146,7 @@ namespace W8ZJTcalllog.Controllers
         {
             var user = await _context.Users.FindAsync(userId);
             user.RecordCount =  _context.HamLogs.Where(n => n.UserId == userId).Count();
+           
             await _context.SaveChangesAsync();
             return Ok();
         }
