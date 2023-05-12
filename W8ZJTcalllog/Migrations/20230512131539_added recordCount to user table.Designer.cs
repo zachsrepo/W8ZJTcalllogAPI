@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using W8ZJTcalllog.Models;
 
@@ -10,9 +11,10 @@ using W8ZJTcalllog.Models;
 namespace W8ZJTcalllog.Migrations
 {
     [DbContext(typeof(FccAmateurContext))]
-    partial class FccAmateurContextModelSnapshot : ModelSnapshot
+    [Migration("20230512131539_added recordCount to user table")]
+    partial class addedrecordCounttousertable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
