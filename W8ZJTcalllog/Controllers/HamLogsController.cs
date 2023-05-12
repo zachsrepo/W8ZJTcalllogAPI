@@ -38,7 +38,11 @@ namespace W8ZJTcalllog.Controllers
             {
                 return NotFound();
             }
-            return await _context.HamLogs.Where(n => n.UserId == userId).OrderByDescending(n => n.Id).Take(quantity).ToListAsync();
+            var limitedList = await _context.HamLogs.Where(n => n.UserId == userId)
+                                                    .OrderByDescending(n => n.Id)
+                                                    .Take(quantity)
+                                                    .ToListAsync();
+            return limitedList;
         }
         // GET: api/HamLogs/callsign/userid
         [HttpGet("{callsign}/{userId}")]
@@ -111,6 +115,7 @@ namespace W8ZJTcalllog.Controllers
           }
             _context.HamLogs.Add(hamLog);
             await _context.SaveChangesAsync();
+            await UpdateRecordCount(hamLog.UserId);
 
             return CreatedAtAction("GetHamLog", new { id = hamLog.Id }, hamLog);
         }
@@ -131,8 +136,17 @@ namespace W8ZJTcalllog.Controllers
 
             _context.HamLogs.Remove(hamLog);
             await _context.SaveChangesAsync();
+            await UpdateRecordCount(hamLog.UserId);
 
             return NoContent();
+        }
+
+        private async Task<IActionResult> UpdateRecordCount(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            user.RecordCount =  _context.HamLogs.Where(n => n.UserId == userId).Count();
+            await _context.SaveChangesAsync();
+            return Ok();
         }
 
         private bool HamLogExists(int id)

@@ -26,6 +26,7 @@ namespace W8ZJTcalllog.Models
         [StringLength(4)] public string? LastWorkedMode { get; set; }
         public int DefaultPower { get; set; } = 100;
         public int LastWorkedPower { get; set; }
+        public int RecordCount { get; set; } = 0;
         [StringLength(20)] public string Status { get; set; } = "NEW";
         public virtual ICollection<HamLog>? HamLogs { get; set; }
     }
