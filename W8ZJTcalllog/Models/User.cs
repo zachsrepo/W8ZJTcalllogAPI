@@ -12,6 +12,7 @@ namespace W8ZJTcalllog.Models
         public bool showNetColumn { get; set; }
         public bool showAddressColumn { get; set; }
         public bool showDxSpot { get; set; }
+        public int spotsRefreshRate { get; set; }
         [StringLength(100)] public string? FilterDxSpots { get; set; }
         [StringLength(100)] public string? SpotsSortBy { get; set; }
         [StringLength(50)] public string FirstName { get; set; } = string.Empty;
