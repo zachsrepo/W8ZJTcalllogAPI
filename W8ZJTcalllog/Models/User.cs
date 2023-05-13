@@ -11,6 +11,9 @@ namespace W8ZJTcalllog.Models
         public bool IsAdmin { get; set; }
         public bool showNetColumn { get; set; }
         public bool showAddressColumn { get; set; }
+        public bool showDxSpot { get; set; }
+        [StringLength(100)] public string? FilterDxSpots { get; set; }
+        [StringLength(100)] public string? SpotsSortBy { get; set; }
         [StringLength(50)] public string FirstName { get; set; } = string.Empty;
         [StringLength(50)] public string LastName { get; set; } = string.Empty;
         [StringLength(30)] public string UserName { get; set; } = string.Empty;
