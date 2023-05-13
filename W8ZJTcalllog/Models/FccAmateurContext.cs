@@ -23,6 +23,7 @@ public partial class FccAmateurContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<HamLog> HamLogs { get; set; }
+    public virtual DbSet<Spot> Spots { get; set; }
 
 
 

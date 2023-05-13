@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using W8ZJTcalllog.Models;
 
@@ -10,9 +11,10 @@ using W8ZJTcalllog.Models;
 namespace W8ZJTcalllog.Migrations
 {
     [DbContext(typeof(FccAmateurContext))]
-    partial class FccAmateurContextModelSnapshot : ModelSnapshot
+    [Migration("20230513174646_add table for dxspots")]
+    partial class addtablefordxspots
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -281,9 +283,22 @@ namespace W8ZJTcalllog.Migrations
 
             modelBuilder.Entity("W8ZJTcalllog.Models.Spot", b =>
                 {
-                    b.Property<long>("nr")
+                    b.Property<long>("Nr")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
+
+                    b.Property<float>("Band")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Call")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("varchar(12)");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("DxCont")
                         .IsRequired()
@@ -327,6 +342,14 @@ namespace W8ZJTcalllog.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("dx_prefix");
 
+                    b.Property<string>("Dxcall")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("varchar(12)");
+
+                    b.Property<float>("Freq")
+                        .HasColumnType("float");
+
                     b.Property<string>("SpotterCont")
                         .IsRequired()
                         .HasMaxLength(5)
@@ -369,39 +392,18 @@ namespace W8ZJTcalllog.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("spotter_prefix");
 
-                    b.Property<float>("band")
-                        .HasColumnType("float");
-
-                    b.Property<string>("call")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("varchar(12)");
-
-                    b.Property<string>("comment")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<string>("dxcall")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("varchar(12)");
-
-                    b.Property<float>("freq")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("time")
+                    b.Property<DateTime>("Time")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("nr");
+                    b.HasKey("Nr");
 
-                    b.HasIndex("band");
+                    b.HasIndex("Band");
 
-                    b.HasIndex("dxcall");
+                    b.HasIndex("Dxcall");
 
-                    b.HasIndex("freq");
+                    b.HasIndex("Freq");
 
-                    b.HasIndex("time", "band");
+                    b.HasIndex("Time", "Band");
 
                     b.ToTable("Spots");
                 });
