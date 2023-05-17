@@ -32,6 +32,18 @@ namespace W8ZJTcalllog.Controllers
                                        .Take(quantity)
                                        .ToListAsync();
         }
+        //// GET: api/Spots/list/50 filter by
+        //[HttpGet("list/{quantity}")]
+        //public async Task<ActionResult<IEnumerable<Spot>>> GetSpots(int quantity)
+        //{
+        //    if (_context.Spots == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return await _context.Spots.OrderByDescending(n => n.nr)
+        //                               .Take(quantity)
+        //                               .ToListAsync();
+        //}
 
         // GET: api/Spots/5
         [HttpGet("{id}")]
